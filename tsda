@@ -1,0 +1,30 @@
+[33mcommit 0ff288aab25ad4c81c8c92d1a4145a37d2f2cba0[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Merge: 7917adb 3d4ae19
+Author: lankipolo123 <83026902+lankipolo123@users.noreply.github.com>
+Date:   Tue Apr 1 09:42:13 2025 +0000
+
+    Merge branch 'main' of https://github.com/lankipolo123/roadfixer-yolo
+
+[33mcommit 7917adbf881deea1c1761a407a3b0289608bcd7a[m
+Author: lankipolo123 <83026902+lankipolo123@users.noreply.github.com>
+Date:   Tue Apr 1 09:40:16 2025 +0000
+
+    Your commit message
+
+[33mcommit 3d4ae19ae8da2309bd386ab6b3ab9b7985e2006c[m
+Author: lankipolo123 <83026902+lankipolo123@users.noreply.github.com>
+Date:   Tue Apr 1 17:38:03 2025 +0800
+
+    Update streamlit_app.py
+
+[33mcommit d2846be558b65ebee133bddaeb51453fc0cc0630[m
+Author: lankipolo123 <83026902+lankipolo123@users.noreply.github.com>
+Date:   Tue Apr 1 09:01:16 2025 +0000
+
+    Added and updated YOLOv8 model (80Yolov8.pt)
+
+[33mcommit 91bc209c0694af71a927daffd6d5804254404c09[m
+Author: lankipolo123 <83026902+lankipolo123@users.noreply.github.com>
+Date:   Tue Apr 1 16:41:06 2025 +0800
+
+    Initial commit
