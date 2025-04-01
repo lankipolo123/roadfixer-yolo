@@ -1,31 +1,41 @@
-from ultralytics import YOLO
 import streamlit as st
 from PIL import Image
+import numpy as np
+from ultralytics import YOLO
 
-# Load the YOLO model
+# Load YOLO model (cached to avoid reloads)
 @st.cache_resource
 def load_model():
-    model = YOLO("assets/80Yolov8.pt")
-    return model
+    return YOLO("assets/80Yolov8.pt")  # Ensure path is correct!
 
 model = load_model()
 
-# Streamlit title and file uploader
-st.title("Pothole Detection Web App")
+# Streamlit UI
+st.title("🚧 Pothole Detection")
 uploaded_file = st.file_uploader("Upload an image", type=["jpg", "png", "jpeg"])
 
 if uploaded_file is not None:
-    # Open the uploaded image
+    # Open image
     image = Image.open(uploaded_file)
-    st.image(image, caption="Uploaded Image", use_container_width=True)
+    st.image(image, caption="Original Image", use_column_width=True)
 
-    # Run the YOLO model
-    results = model(image)
+    # Convert PIL to numpy (YOLO expects numpy)
+    image_np = np.array(image)
 
-    # Render the result
-    if results:  # Check if results are not empty
-        # Rendering the image with bounding boxes
-        img_with_boxes = results[0].plot()  # Assuming the first result is the one you need
-        st.image(img_with_boxes, caption="Detected Potholes", use_container_width=True)
+    # Run YOLO detection
+    results = model(image_np)
+
+    # Check if potholes detected
+    if len(results[0].boxes) > 0:
+        # Get annotated image (convert BGR to RGB for Streamlit)
+        annotated_img = results[0].plot()[:, :, ::-1]
+        st.image(annotated_img, caption="Detected Potholes", use_column_width=True)
+
+        # Show detection details
+        st.subheader("Detection Results")
+        for box in results[0].boxes:
+            conf = box.conf.item()  # Confidence score
+            cls_id = box.cls.item()  # Class ID (0 if only 'pothole' class)
+            st.write(f"- Pothole detected with confidence: {conf:.2f}")
     else:
-        st.write("No potholes detected.")
+        st.warning("No potholes detected. Try another image.")
